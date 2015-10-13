@@ -1,0 +1,148 @@
+
+@export on;
+@export set filename="/Users/milavarasan/Desktop/LOC_lists/active_wwf_english" CsvColumnDelimiter = ",";
+
+--Active WWF English
+select 22 as sn_id,
+       'en_US' as 'locale',
+       zid as 'user_uid'
+from v_user
+where game_id in (91,95,107,108,5002535)
+ and lastdate between current_date - 15 and current_date - 1
+ and client_id not in (1)
+ and sn_id = 22
+ and upper(ip_country) = 'US'
+ and zid is not null
+;
+
+@export off;
+
+
+@export on;
+@export set filename="/Users/milavarasan/Desktop/LOC_lists/lapsed_wwf_english" CsvColumnDelimiter = ",";
+
+--Lapsed WWF English
+select 22 as sn_id,
+       'en_US' as 'locale',
+       zid as 'user_uid'
+       
+from v_user
+where game_id in (91,95,107,108,5002535)
+ and lastdate between current_date - 180 and current_date - 15
+ and sn_id = 22
+ and upper(ip_country) = 'US'
+ and client_id not in (1)
+ and zid is not null
+;
+
+@export off;
+
+
+@export on;
+@export set filename="/Users/milavarasan/Desktop/LOC_lists/WWF_active_lapsed_inter" CsvColumnDelimiter = ",";
+
+--WWF active/lapsed
+select 22 as sn_id,
+       case when upper(ip_country) in ('AR','MX','ES') then 'es_ES'
+            when upper(ip_country) = 'BR' then 'pt_BR'
+            when upper(ip_country) = 'GB' then 'en_US'
+            when upper(ip_country) = 'CA' then 'en_US'
+            when upper(ip_country) = 'DE' then 'de_DE'
+            when upper(ip_country) = 'FR' then 'fr_FR'
+            when upper(ip_country) = 'IT' then 'it_IT'
+            when upper(ip_country) = 'US' then 'en_US' 
+            end as 'locale',
+       zid
+from v_user
+where game_id in (91,95,107,108,5002535)
+ and sn_id = 22
+ and lastdate > current_date - 180
+ and client_id not in (1)
+ and upper(ip_country) in ('BR','AR','MX','DE','GB','EN','FR','ES','IT','UK','CA')
+ and zid is not null
+;
+
+@export off;
+
+
+@export on;
+@export set filename="/Users/milavarasan/Desktop/LOC_lists/WWF_active_lapsed_web_inter" CsvColumnDelimiter = ",";
+
+--WWF active/lapsed
+select 22 as sn_id,
+       case when upper(ip_country) in ('AR','MX','ES') then 'es_ES'
+            when upper(ip_country) = 'BR' then 'pt_BR'
+            when upper(ip_country) = 'GB' then 'en_US'
+            when upper(ip_country) = 'CA' then 'en_US'
+            when upper(ip_country) = 'DE' then 'de_DE'
+            when upper(ip_country) = 'FR' then 'fr_FR'
+            when upper(ip_country) = 'IT' then 'it_IT'
+            when upper(ip_country) = 'US' then 'en_US' 
+            end as 'locale',
+       zid
+from v_user
+where game_id in (91,95,107,108,5002535)
+ --and lastdate between current_date - 180 and current_date - 15
+ and client_id in (1)
+ and sn_id = 22
+ and lastdate > current_date - 180
+ and upper(ip_country) in ('BR','AR','MX','DE','GB','EN','FR','ES','IT','UK','CA')
+ and zid is not null
+;
+
+@export off;
+
+
+@export on;
+@export set filename="/Users/milavarasan/Desktop/LOC_lists/word_games_active_lapsed_inter" CsvColumnDelimiter = ",";
+
+-- Word Games Active/Lapsed
+select 22 as sn_id,
+       case when upper(ip_country) in ('AR','MX','ES') then 'es_ES'
+            when upper(ip_country) = 'BR' then 'pt_BR'
+            when upper(ip_country) = 'GB' then 'en_US'
+            when upper(ip_country) = 'CA' then 'en_US'
+            when upper(ip_country) = 'DE' then 'de_DE'
+            when upper(ip_country) = 'FR' then 'fr_FR'
+            when upper(ip_country) = 'IT' then 'it_IT'
+            when upper(ip_country) = 'US' then 'en_US' 
+            end as 'locale',
+       zid as user_uid
+       
+from v_user
+where game_id in (109, 110, 111, 112, 252, 253, 93, 97, 5001130, 5001131, 5001638, 5001836, 5001909)
+and upper(ip_country) in ('US','BR','AR','MX','DE','GB','EN','FR','ES','IT','UK','CA')
+ and lastdate > current_date - 180
+ and zid is not null
+ and sn_id = 22
+;
+
+@export off;
+
+
+@export on;
+@export set filename="/Users/milavarasan/Desktop/LOC_lists/all_other_games_active_lapsed" CsvColumnDelimiter = ",";
+
+-- All other games active/lapsed
+select 22 as sn_id,
+       case when upper(ip_country) in ('AR','MX','ES') then 'es_ES'
+            when upper(ip_country) = 'BR' then 'pt_BR'
+            when upper(ip_country) = 'GB' then 'en_US'
+            when upper(ip_country) = 'CA' then 'en_US'
+            when upper(ip_country) = 'DE' then 'de_DE'
+            when upper(ip_country) = 'FR' then 'fr_FR'
+            when upper(ip_country) = 'IT' then 'it_IT'
+            when upper(ip_country) = 'US' then 'en_US' 
+            end as 'locale',
+       zid as user_uid
+       
+from v_user
+where game_id not in (63,118,5002807,91,95,107,108,5002535,5002654,
+                      109, 110, 111, 112, 252, 253, 93, 97, 5001130, 5001131, 5001638, 5001836, 5001909)
+ and sn_id = 22
+ and upper(ip_country) in ('US','BR','AR','MX','DE','GB','EN','FR','ES','IT','UK','CA')
+ and lastdate > current_date - 180
+ and zid is not null
+;
+
+@export off;
